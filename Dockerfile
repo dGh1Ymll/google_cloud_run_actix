@@ -1,5 +1,7 @@
 FROM gcr.io/actix-test/cargo:latest as builder
 
+RUN apt-get update && apt-get -y install ca-certificates cmake musl-tools libssl-dev && rm -rf /var/lib/apt/lists/*
+
 workdir /usr/src/project
 
 COPY . .
