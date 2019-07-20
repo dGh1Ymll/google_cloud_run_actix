@@ -10,4 +10,4 @@ FROM alpine:latest
 
 COPY --from=builder /target/x84_64-unknown-linux-musl/release/google_cloud_run_actix .
 
-CMD["/google_cloud_run_actix"]
+CMD ["/google_cloud_run_actix"]
