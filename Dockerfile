@@ -25,6 +25,6 @@ RUN cargo build --target x86_64-unknown-linux-musl --release
 # final image for prod 
 FROM alpine:latest
 # Copy over our service
-COPY --from=builder /cloud_run_actix/target/x84_64-unknown-linux-musl/release/cloud_run_actix .
+COPY --from=builder /cloud_run_actix/target/x86_64-unknown-linux-musl/release/cloud_run_actix .
 # set up our start up command
 CMD ["/cloud_run_actix"]
