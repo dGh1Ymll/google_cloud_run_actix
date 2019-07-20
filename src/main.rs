@@ -6,23 +6,22 @@ fn index() -> impl Responder {
 }
 
 fn main() {
-    let mut host = "0.0.0.0:".to_string();
-    match env::var("PORT") {
-        Ok(port) => {
-            host = host + &port.to_string();
-            println!("Localhost and port: {}", host);
-        }
-        Err(e) => {
-            println!("Couldn't read the PORT number ({})", e);
-            host = host + &"8080".to_string();
-        }
+    println!("Test test did i starting.....");
+    let host = "0.0.0.0:".to_string();
+    
+    let port = match env::var("PORT") {
+        Ok(port) => port.to_string(),
+        Err(_) => "8080".to_string(),
     };
 
+    let addr = host + &port;
+    println!("Hosting on addres:{}", addr);
+    
     HttpServer::new(|| {
         App::new()
             .route("/", web::get().to(index))
     })
-    .bind(host)
+    .bind(addr)
     .unwrap()
     .run()
     .unwrap();
