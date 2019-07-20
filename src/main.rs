@@ -2,7 +2,7 @@ use actix_web::{web, App, HttpResponse, HttpServer, Responder};
 use std::env;
 
 fn index() -> impl Responder {
-    HttpResponse::Ok().body("Hello world!")
+    HttpResponse::Ok().body("Hello world from cloud run!")
 }
 
 fn main() {
@@ -12,7 +12,10 @@ fn main() {
             host = host + &port.to_string();
             println!("Localhost and port: {}", host);
         }
-        Err(e) => println!("Couldn't read PORT ({})", e),
+        Err(e) => {
+            println!("Couldn't read the PORT number ({})", e);
+            host = host + &"8080".to_string();
+        }
     };
 
     HttpServer::new(|| {
