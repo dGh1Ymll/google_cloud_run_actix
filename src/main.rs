@@ -6,10 +6,7 @@ fn index() -> impl Responder {
 }
 
 fn main() {
-    
-    let mut host = "127.0.0.1:".to_string();
-
-
+    let mut host = "0.0.0.0:".to_string();
     match env::var("PORT") {
         Ok(port) => {
             host = host + &port.to_string();
