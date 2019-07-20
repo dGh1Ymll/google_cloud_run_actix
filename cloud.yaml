@@ -1,0 +1,4 @@
+steps: 
+# Build
+- name: 'grc.io/$PROJECT_ID/cargo'
+  args: ['build']
