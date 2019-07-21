@@ -9,12 +9,12 @@ fn main() {
     println!("Test test did i starting.....");
     let host = "0.0.0.0:".to_string();
     
-    let port = match env::var("PORT") {
+    let port_number = match env::var("PORT") {
         Ok(port) => port.to_string(),
         Err(_) => "8080".to_string(),
     };
 
-    let addr = host + &port;
+    let addr = host + &port_number;
     println!("Hosting on addres:{}", addr);
     
     HttpServer::new(|| {

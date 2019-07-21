@@ -5,19 +5,9 @@ RUN apt-get update && apt-get -y install ca-certificates cmake musl-tools libssl
 RUN rustup target add x86_64-unknown-linux-musl
 RUN rustup update
 
-# create a new empty shell project
-RUN USER=root cargo new --bin cloud_run_actix
 WORKDIR /cloud_run_actix
 
-COPY ./Cargo.lock ./Cargo.lock
-COPY ./Cargo.toml ./Cargo.toml
-
-# this build step will cache our dependencies
-RUN cargo build --target x86_64-unknown-linux-musl --release
-RUN rm src/*.rs
-
-# copy over our source tree
-COPY ./src ./src
+COPY . .
 
 # build our source for release 
 RUN cargo build --target x86_64-unknown-linux-musl --release
