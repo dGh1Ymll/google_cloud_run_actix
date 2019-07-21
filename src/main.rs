@@ -6,7 +6,6 @@ fn index() -> impl Responder {
 }
 
 fn main() {
-    println!("Test test did i starting.....");
     let host = "0.0.0.0:".to_string();
     
     let port_number = match env::var("PORT") {
@@ -15,7 +14,6 @@ fn main() {
     };
 
     let addr = host + &port_number;
-    println!("Hosting on addres:{}", addr);
     
     HttpServer::new(|| {
         App::new()
