@@ -1,11 +1,16 @@
 steps: 
 # Build
 - name: 'gcr.io/cloud-builders/docker'
-  args: [
-      'build', 
-      '-t', 
-      'gcr.io/$PROJECT_ID/cloud-run-actix',
-      '.'
+  args: ['build', '-t', 'gcr.io/$PROJECT_ID/cloud-run-actix','.']
+# push the container image to Container Registry
+- name: 'gcr.io/cloud-builders/docker',
+  args: ['push', 'gcr.io/$PROJECT_ID/cloud-run-actix']
+# Deploy container image to Cloud Run
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: ['beta', 'run', 'deploy', 'cloud-run-actix', 
+      '--image', 'gcr.io/$PROJECT_ID/cloud-run-actix', 
+      '--region', 'europe-west1',
+      '--platform', 'managed'
       ]
 images: ['gcr.io/$PROJECT_ID/cloud-run-actix']
 timeout: 20m
